@@ -1,0 +1,22 @@
+diff --git a/app/helpers/issues_helper.rb b/app/helpers/issues_helper.rb
+index 5073571..de746aa 100644
+--- a/app/helpers/issues_helper.rb
++++ b/app/helpers/issues_helper.rb
+@@ -48,13 +48,18 @@ module IssuesHelper
+     @cached_label_priority ||= l(:field_priority)
+     @cached_label_project ||= l(:field_project)
+ 
+-    link_to_issue(issue) + "<br /><br />".html_safe +
++    tooltip_content = link_to_issue(issue) + "<br /><br />".html_safe +
+       "<strong>#{@cached_label_project}</strong>: #{link_to_project(issue.project)}<br />".html_safe +
+       "<strong>#{@cached_label_status}</strong>: #{h(issue.status.name)}<br />".html_safe +
+       "<strong>#{@cached_label_start_date}</strong>: #{format_date(issue.start_date)}<br />".html_safe +
+       "<strong>#{@cached_label_due_date}</strong>: #{format_date(issue.due_date)}<br />".html_safe +
+       "<strong>#{@cached_label_assigned_to}</strong>: #{h(issue.assigned_to)}<br />".html_safe +
+       "<strong>#{@cached_label_priority}</strong>: #{h(issue.priority.name)}".html_safe
++
++    issue.custom_field_values.each do |c|
++      tooltip_content += "<br/ ><strong>#{c.custom_field.name}</strong>: #{h show_value(c)}".html_safe
++    end
++    tooltip_content
+   end

@@ -1,0 +1,3 @@
+#/bin/bash
+rake redmine:email:receive_imap host=<host> port=993 ssl=true username=<username> password=<pass> \
+  folder=inbox move_on_success=succeeded move_on_failure=failed unknown_user=accept no_permission_check=1 project=<project> tracker=<tracker> priority=<prio> allow_override=project,tracker RAILS_ENV=production -v --trace

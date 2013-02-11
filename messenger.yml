@@ -1,0 +1,15 @@
+development: &development
+  type: xmpp4r
+  jid: redminebytest@jabber.piratenpartei.de
+  password: <pass>
+  host: jabber.piratenpartei.de
+  port: 5223
+  status: Redmine Test
+  ssl: true
+  debug: false
+
+test:
+  type: mock
+
+production:
+  <<: *development
