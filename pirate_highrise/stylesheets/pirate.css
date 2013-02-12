@@ -1,0 +1,10 @@
+/***************************************************************************/
+/*  						Pirate		
+/***************************************************************************/
+#header {
+	background-color: #FFA640;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FF8800), to(#FFE1BF));
+	background-image: -moz-linear-gradient(center top, #FF8800 0%, #FFE1BF 100% );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7D30', endColorstr='#EC6600');
+    color: #333333;
+}
