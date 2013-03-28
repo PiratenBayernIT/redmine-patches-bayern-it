@@ -1,0 +1,12 @@
+diff --git a/app/views/issues/new.html.erb b/app/views/issues/new.html.erb
+index 45a2582..1979e2e 100644
+--- a/app/views/issues/new.html.erb
++++ b/app/views/issues/new.html.erb
+@@ -37,6 +37,7 @@
+                   :remote => true,
+                   :method => 'get' %>
+       </span>
++      <%= call_hook(:view_issues_watchers_bottom, { :issue => @issue }) %>
+       </p>
+     <% end %>
+   </div>

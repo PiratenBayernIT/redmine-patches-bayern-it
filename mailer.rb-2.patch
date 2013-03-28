@@ -1,0 +1,42 @@
+diff --git a/app/models/mailer.rb b/app/models/mailer.rb
+index 2d867ca..59eab4f 100644
+--- a/app/models/mailer.rb
++++ b/app/models/mailer.rb
+@@ -56,10 +56,37 @@ class Mailer < ActionMailer::Base
+   #   Mailer.issue_edit(journal).deliver => sends an email to issue recipients
+   def issue_edit(journal)
+     issue = journal.journalized.reload
++    # XXX: dirty hack for mailinglist notifications, please improve this!
++    no_mailinglist = true
++    if issue.status.name == "Bestätigt"
++        if (journal.new_value_for('status_id') \
++            or journal.new_value_for('description') \
++            or journal.new_value_for('Veranstaltungsort') \
++            or journal.new_value_for('Ende') \
++            or journal.new_value_for('Adresse') \
++            or journal.new_value_for('Veranstaltungsort') \
++            or journal.new_value_for('Startzeit') \
++            or journal.new_value_for('start_date') \
++            or journal.new_value_for('due_date'))
++
++          no_mailinglist = nil
++        end
++    elsif issue.status.name == "Abgesagt"
++        if journal.new_value_for('status_id') 
++          no_mailinglist = nil
++        end
++    end
++    Rails.logger.info("### no_mailinglist #{no_mailinglist}")
++    # end hack
+     redmine_headers 'Project' => issue.project.identifier,
+                     'Issue-Id' => issue.id,
+                     'Issue-Author' => issue.author.login
+     redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
++    # XXX: dirty hack for mailinglist notifications, please improve this!
++    redmine_headers 'No-Mailinglist' => no_mailinglist
++    redmine_headers 'Issue-Status' => issue.status.name
++    # end hack
++    Rails.logger.info("no mailinglist header? '#{no_mailinglist}' #{issue.status.name}")
+     message_id journal
+     references issue
+     @author = journal.user

@@ -1,0 +1,26 @@
+diff --git a/config/locales/de.yml b/config/locales/de.yml
+index b39b2a9..45544c0 100644
+--- a/config/locales/de.yml
++++ b/config/locales/de.yml
+@@ -255,10 +255,10 @@ de:
+   field_is_default: Standardeinstellung
+   field_tracker: Tracker
+   field_subject: Thema
+-  field_due_date: Abgabedatum
++  field_due_date: Enddatum
+   field_assigned_to: Zugewiesen an
+   field_priority: Priorität
+-  field_fixed_version: Zielversion
++  field_fixed_version: Meilenstein
+   field_user: Benutzer
+   field_principal: Auftraggeber
+   field_role: Rolle
+@@ -1076,7 +1076,7 @@ de:
+   label_attribute_of_project: "%{name} des Projekts"
+   label_attribute_of_author: "%{name} des Autors"
+   label_attribute_of_assigned_to: "%{name} des Bearbeiters"
+-  label_attribute_of_fixed_version: "%{name} der Zielversion"
++  label_attribute_of_fixed_version: "%{name} des Meilensteins"
+   label_copy_subtasks: Unteraufgaben kopieren
+   label_copied_to: Kopiert nach
+   label_copied_from: Kopiert von
