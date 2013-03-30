@@ -1,8 +1,8 @@
 diff --git a/app/models/mail_handler.rb b/app/models/mail_handler.rb
-index 8421fb6..d665454 100644
+index 8421fb6..99391c5 100644
 --- a/app/models/mail_handler.rb
 +++ b/app/models/mail_handler.rb
-@@ -177,9 +177,21 @@ class MailHandler < ActionMailer::Base
+@@ -177,10 +177,22 @@ class MailHandler < ActionMailer::Base
        issue.subject = '(no subject)'
      end
      issue.description = cleaned_up_text_body
@@ -10,6 +10,7 @@ index 8421fb6..d665454 100644
 +    
      # add To and Cc as watchers before saving so the watchers can reply to Redmine
      add_watchers(issue)
+     issue.save!
 +    ### patch for redmine_pirate_helpdesk to add sender mail to created tickets
 +    ### TODO: move to plugin
 +    custom_field = CustomField.find_by_name('Absender-Mail')
@@ -19,9 +20,9 @@ index 8421fb6..d665454 100644
 +    )
 +    if custom_value
 +      custom_value.value = issue.author.mail
++      custom_value.save()
 +    end
 +    ### end patch
-+    custom_value.save()
-     issue.save!
      add_attachments(issue)
      logger.info "MailHandler: issue ##{issue.id} created by #{user}" if logger && logger.info
+     issue
