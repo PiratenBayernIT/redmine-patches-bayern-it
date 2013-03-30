@@ -1,0 +1,13 @@
+diff --git a/app/views/issues/show.html.erb b/app/views/issues/show.html.erb
+index 83b4f56..0d13215 100644
+--- a/app/views/issues/show.html.erb
++++ b/app/views/issues/show.html.erb
+@@ -74,6 +74,8 @@
+ <div class="description">
+   <div class="contextual">
+   <%= link_to l(:button_quote), quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment' if authorize_for('issues', 'edit') %>
++  <%# hook for redmine_pirate_helpdesk %>
++  <%= call_hook(:view_issues_show_description_contextual_links, :issue => @issue) %>
+   </div>
+ 
+   <p><strong><%=l(:field_description)%></strong></p>

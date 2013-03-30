@@ -42,10 +42,10 @@ mailer.rb-2.patch
     "X-Redmine-No-Mailinglist: true" gesetzt und können damit einfach ausgefiltert werden.
 
 
-issues_new.html.erb.patch
--------------------------
+issues\_new.html.erb.patch
+--------------------------
 
-* Hook hinzugefügt, um Elemente unten in die Watchers-Box hinzuzufügen. Wird genutzt, um redmine_watchers_by_group in der modifizierten Form einzubauen.
+* Hook hinzugefügt, um Elemente unten in die Watchers-Box hinzuzufügen. Wird genutzt, um redmine-watchers-by-group in der modifizierten Form einzubauen.
 
 
 de.yml.patch
@@ -54,7 +54,10 @@ de.yml.patch
 Paar Uebersetzungs-Anpassungen, damit das Ganze besser zu Parteiarbeit passt.
 
 
-mail_handler.patch
-------------------
+Patches für redmine\_pirate\_helpdesk
+-------------------------------------
 
-Patch, um die Sender-Mailadresse als custom field hinzuzufügen ("^Absender-Mail")
+* mail\_handler.patch: Sender-Mailadresse als custom field hinzufügen ("Absender-Mail")
+* journals\_helper.patch: Neuer Hook für Plugin
+* issues\_show.html.erb.patch: " dito "
+
