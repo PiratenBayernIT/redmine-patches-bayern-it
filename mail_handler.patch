@@ -1,8 +1,8 @@
 diff --git a/app/models/mail_handler.rb b/app/models/mail_handler.rb
-index 8421fb6..89abed4 100644
+index 8421fb6..d665454 100644
 --- a/app/models/mail_handler.rb
 +++ b/app/models/mail_handler.rb
-@@ -177,9 +177,22 @@ class MailHandler < ActionMailer::Base
+@@ -177,9 +177,21 @@ class MailHandler < ActionMailer::Base
        issue.subject = '(no subject)'
      end
      issue.description = cleaned_up_text_body
@@ -17,10 +17,9 @@ index 8421fb6..89abed4 100644
 +      :first,
 +      :conditions => ["customized_id = ? AND custom_field_id = ?", issue.id, custom_field.id]
 +    )
-+    if not custom_value
-+      return
++    if custom_value
++      custom_value.value = issue.author.mail
 +    end
-+    custom_value.value = issue.author.mail
 +    ### end patch
 +    custom_value.save()
      issue.save!
