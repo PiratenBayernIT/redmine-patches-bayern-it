@@ -52,3 +52,9 @@ de.yml.patch
 ------------
 
 Paar Uebersetzungs-Anpassungen, damit das Ganze besser zu Parteiarbeit passt.
+
+
+mail_handler.patch
+------------------
+
+Patch, um die Sender-Mailadresse als custom field hinzuzufügen ("^Absender-Mail")
