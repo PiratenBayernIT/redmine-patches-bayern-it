@@ -22,6 +22,18 @@ index 7166025..9fc2f5e 100644
 +    # end hack
      message_id issue
      @author = issue.author
+     @issue = issue
+     @issue_url = url_for(:controller => 'issues', :action => 'show', :id => issue)
+     recipients = issue.recipients
+     cc = issue.watcher_recipients - recipients
++    subject = ((issue.project.ancestors + [issue.project]).collect { |p| p.name }).join("/")
+     mail :to => recipients,
+       :cc => cc,
+-      :subject => "[#{issue.project.name} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
++      :subject => "[#{subject} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
+   end
+ 
+   # Builds a Mail::Message object used to email recipients of the edited issue.
 @@ -55,10 +66,36 @@ class Mailer < ActionMailer::Base
    #   Mailer.issue_edit(journal).deliver => sends an email to issue recipients
    def issue_edit(journal)
