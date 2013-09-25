@@ -60,4 +60,7 @@ Patches für redmine\_pirate\_helpdesk
 * DEPRECATED, ist jetzt im Patch enthalten! (mail\_handler.patch: Sender-Mailadresse als custom field hinzufügen ("Absender-Mail"))
 * journals\_helper.patch: Neuer Hook für Plugin
 * issues\_show.html.erb.patch: " dito "
+* 
+
+TEST
 
