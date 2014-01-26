@@ -1,14 +1,16 @@
 diff --git a/app/models/mailer.rb b/app/models/mailer.rb
-index 9c19438..7701775 100644
+index c6becfd..0bc64f3 100644
 --- a/app/models/mailer.rb
 +++ b/app/models/mailer.rb
-@@ -43,9 +43,10 @@ class Mailer < ActionMailer::Base
+@@ -39,9 +39,10 @@ class Mailer < ActionMailer::Base
+     @issue = issue
+     @users = to_users + cc_users
      @issue_url = url_for(:controller => 'issues', :action => 'show', :id => issue)
-     recipients = issue.recipients
-     cc = issue.watcher_recipients - recipients
-+    subject = ((issue.project.ancestors + [issue.project]).collect { |p| p.name }).join("/")
-     mail :to => recipients,
-       :cc => cc,
++    project_path = ((issue.project.ancestors + [issue.project]).collect { |p| p.name }).join("/")
+     mail :to => to_users.map(&:mail),
+       :cc => cc_users.map(&:mail),
 -      :subject => "[#{issue.project.name} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
-+      :subject => "[#{subject} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
++      :subject => "[#{project_path} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
    end
+ 
+   # Notifies users about a new issue
