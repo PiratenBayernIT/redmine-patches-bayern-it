@@ -1,11 +1,11 @@
 diff --git a/app/models/mailer.rb b/app/models/mailer.rb
-index 7166025..9fc2f5e 100644
+index 0bc64f3..6f17bfa 100644
 --- a/app/models/mailer.rb
 +++ b/app/models/mailer.rb
-@@ -33,19 +33,30 @@ class Mailer < ActionMailer::Base
-   #   issue_add(issue) => Mail::Message object
-   #   Mailer.issue_add(issue).deliver => sends an email to issue recipients
-   def issue_add(issue)
+@@ -29,10 +29,20 @@ class Mailer < ActionMailer::Base
+ 
+   # Builds a mail for notifying to_users and cc_users about a new issue
+   def issue_add(issue, to_users, cc_users)
 +    # XXX: dirty hack for mailinglist notifications, please improve this!
 +    no_mailinglist = true
 +    if issue.status.name == "Bestätigt"
@@ -21,28 +21,27 @@ index 7166025..9fc2f5e 100644
 +    Rails.logger.info("### no_mailinglist #{no_mailinglist}")
 +    # end hack
      message_id issue
+     references issue
      @author = issue.author
-     @issue = issue
-     @issue_url = url_for(:controller => 'issues', :action => 'show', :id => issue)
-     recipients = issue.recipients
-     cc = issue.watcher_recipients - recipients
-+    subject = ((issue.project.ancestors + [issue.project]).collect { |p| p.name }).join("/")
-     mail :to => recipients,
-       :cc => cc,
--      :subject => "[#{issue.project.name} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
-+      :subject => "[#{subject} - #{issue.tracker.name} ##{issue.id}] (#{issue.status.name}) #{issue.subject}"
-   end
- 
-   # Builds a Mail::Message object used to email recipients of the edited issue.
-@@ -55,10 +66,36 @@ class Mailer < ActionMailer::Base
-   #   Mailer.issue_edit(journal).deliver => sends an email to issue recipients
-   def issue_edit(journal)
-     issue = journal.journalized.reload
+@@ -57,10 +67,46 @@ class Mailer < ActionMailer::Base
+   # Builds a mail for notifying to_users and cc_users about an issue update
+   def issue_edit(journal, to_users, cc_users)
+     issue = journal.journalized
 +    # XXX: dirty hack for mailinglist notifications, please improve this!
 +    no_mailinglist = true
++    # custom field ids:
++    # 3 == Ende
++    # 8 == Adresse
++    # 10 == Veranstaltungsort
++    # 2 == Startzeit
 +    if issue.status.name == "Bestätigt"
 +        if (journal.new_value_for('status_id') \
 +            or journal.new_value_for('description') \
++            or journal.new_value_for('subject') \
++            or journal.new_value_for(3) \
++            or journal.new_value_for(8) \
++            or journal.new_value_for(10) \
++            or journal.new_value_for(2) \
 +            or journal.new_value_for('Veranstaltungsort') \
 +            or journal.new_value_for('Ende') \
 +            or journal.new_value_for('Adresse') \
@@ -66,7 +65,7 @@ index 7166025..9fc2f5e 100644
 +    # XXX: dirty hack for mailinglist notifications, please improve this!
 +    redmine_headers 'No-Mailinglist' => no_mailinglist
 +    redmine_headers 'Issue-Status' => issue.status.name
-+    Rails.logger.info("no mailinglist header? '#{no_mailinglist}' #{issue.status.name}")
++    Rails.logger.info("### no mailinglist header? '#{no_mailinglist}' #{issue.status.name}")
 +    # end hack
      message_id journal
      references issue
