@@ -1,7 +1,7 @@
 @import url(../../../stylesheets/application.css);
 @import url(pirate.css);
-
-/* Hightrise tabs theme version 1.1.1 by Kirill Bezrukov www.redminecrm.com */
+@import url(left_menu.css);
+/* Hightrise theme version 1.1.2 by Kirill Bezrukov www.redminecrm.com */
 
 #header > h1 {
 	background: url(../images/piraten_bayern.png) no-repeat 10px 0px;
@@ -23,12 +23,10 @@ h1, h2, h3, h4 {
 	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif;
 }
 
-body, #wrapper { background-color:#FFE1BF; font-family: "Bitstream Sans", verdana, arial, helvetica, sans-serif;}
+body, #wrapper { background-color:#FFE1BF; font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif;}
 
 #main { background: #EEEEEE; margin: 15px 15px 0px 15px; }
-#top-menu { background: #FF8800; color: #000044; padding: 7px 10px 2px 20px;}
-#top-menu a { color: #272828; font-size: 14px; padding: 6px;}
-#top-menu #loggedas { color: #0000AA; }
+#top-menu { background: #FF8800; padding: 7px 10px 2px 20px;}
 
 div.flash {
 	border: 0px solid;
@@ -112,31 +110,20 @@ div#content > div.wiki {
 #main-menu {left: 15px;}
 
 #main-menu li a {
-	background-color: transparent !important;
+	background-color: transparent;
 }
 
 #main-menu li a.selected, #main-menu li a.selected:hover {
-	background-color: #EEEEEE !important; 
+	background-color: #EEEEEE; 
 	color: #222;
 }
 
 
 #main-menu li a:hover {background-color:transparent;}
 
-#header {
-	padding-bottom: 10px;
-	padding-top: 10px;
-	padding-left: 10px;
-	background-position-y: 11%;
-	height: auto;
-}
-
-#header a {
-    color: black;
-}
 
 #quick-search {
-	padding-top: 10px;
+	padding-top: 2px;
 }
 
 div#welcome-store-content h1, 
@@ -186,10 +173,10 @@ div.contact.details, div.deal.details {
 h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 {border-bottom: 0px;}
 
 /* Menu */
-#main-menu li a { background-color: #507AAA; font-weight: bold;}
+/*#main-menu li a { background-color: #507AAA; font-weight: bold;}
 #main-menu li a:hover { background: #507AAA; text-decoration: underline; }
 #main-menu li a.selected, #main-menu li a.selected:hover { background-color:#EEEEEE; }
-
+*/
 /* Tables */
 table.list tbody td, table.list tbody tr:hover td { border: solid 1px #d7d7d7; }
 table.list thead th {
@@ -244,6 +231,24 @@ input[type="text"], input[type="password"], textarea, select { padding: 2px; bor
 input[type="text"], input[type="password"] { padding: 3px; }
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { border: 1px solid #888866; }
 option { border-bottom: 1px dotted #d7d7d7; }
+
+/* search input box */
+#quick-search input {
+	vertical-align: top;
+}
+
+#quick-search label {
+	vertical-align: super;
+}
+
+#quick-search a {
+    color: #333333;
+}
+
+#top-menu, #top-menu a, #top-menu #loggedas {
+    font-size: 14px;
+    padding-right: 2px;
+}
 
 /* Misc */
 .box { background-color: #fcfcfc; }   
@@ -386,7 +391,7 @@ body.action-login #login-form table {
 
 /*Contacts*/
 
-span.tag, span.deal-status {
+span.tag-label-color{
 	color: white;
 	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
 	font-size: 9px !important;
@@ -405,24 +410,29 @@ span.tag, span.deal-status {
 	border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-span.tag {
+span.tag-label-color {
 	background-color: #96CBFF;
 }
 
-span.tag:hover {
+span.tag-label-color:hover {
 	background-color: #77ADE2;
 }
 
-span.tag a, span.deal-status span, span.deal-status a {
+span.tag-label-color a, span.tag-label-color span {
 	font-weight: bold !important;
 	font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif !important; 
 }
 
-span.deal-status a:hover, span.tag a:hover {
+span.tag-label-color:hover a {
 	color: black;
 	text-shadow: none;
 }
 
+
+input.autocomplete {
+	border-radius: initial;
+	height: initial;
+}
 
 /*******************/
 /* 		STORE			
@@ -549,75 +559,10 @@ button.ui-corner-all {
 	font-size: inherit;
 }
 
-
-/***************************************************************************/
-/*  						LEFT MENU BAR		
-/***************************************************************************/
-
-#header > h1 {
-	margin-top: 5px;
-	margin-left: 5px;
-}
-
 #header {
-	height: 4.3em;
-	-webkit-box-shadow: #666 0 0 3px;
-	box-shadow: #666 0 0 3px;
-}
-
-#main {
-	margin-left: 165px;
-}
-
-#quick-search {
-float: right;
-margin-top: 12px;
-margin-right: 8px;
-}
-
-#sidebar {
-width: 25% !important; 
-}
-
-#content {
-width: 71% !important;
-}
-
-#main.nosidebar #content {
-	width: auto !important;
-}
-
-#main-menu {
-	margin: 70px 0 0 -10px;
-	padding: 0;
-	position: relative;
-	width: 150px;
-}
-
-#main-menu li a {
-color: #555;
-text-shadow: 0px 1px 1px white;
-}
-
-
-#main-menu li {
-	float: none;
-	list-style-type: none;
-	margin: 0;
 	padding-bottom: 10px;
+	padding-top: 10px;
+	background-position-y: 11%;
+	height: auto;
+	min-height: initial;
 }
-
-#main-menu li  a:hover, #main-menu li  a:visited:hover {
-	background-color: #EFEDE7;
-	color: #333;
-}
-
-#main-menu li a.selected, #main-menu li a.selected:hover {
-	background-color: #E5E3DE !important; 
-	color: #222;
-}
-
-#main-menu ul {
-	width: 150px;
-}
-
