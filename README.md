@@ -1,4 +1,10 @@
-Redmine patches
+Redmine Theme
+=============
+
+* pirate\_highrise nach redmine/public/themes kopieren
+
+
+Redmine Patches
 ===============
 
 
@@ -9,8 +15,8 @@ messenger.yml
 * Pass muss noch eingefgt werden
 
 
-get\_mail
----------
+get\_mail\_template
+-------------------
 
 * einfaches Rake-Script um Mails vom IMAP-Server zu holen
 * es muss einiges ergänzt werden, vor allem Username und Passwort für den Mailbenutzer
@@ -27,6 +33,12 @@ issues\_helper.patch
 --------------------
 
 * Custom fields für Tooltips im Kalender 
+
+
+issues\_helper-2.patch
+----------------------
+
+* Start- und Endzeit hinzugefügt zu Mail-Notifications; leere Felder ignorieren
 
 
 mailer.rb.patch
